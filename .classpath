@@ -28,8 +28,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/workspace/eventcalendar/xdoclet-1.2.3.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/eventcalendar/xjavadoc-1.1.jar"/>
+	<classpathentry kind="lib" path="D:/event-calendar.git/trunk/xdoclet-1.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/event-calendar.git/trunk/xjavadoc-1.1.jar"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.wtp.jpa.DATANUCLEUS_CONTAINER">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

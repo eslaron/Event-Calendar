@@ -27,6 +27,8 @@ public class EventsController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> create(@RequestBody Event data) {
     	
+    	System.out.println("Dodaję.");
+    	
     	message = "eventCreated";
     	HttpStatus responseStatus = HttpStatus.OK;
     
