@@ -1,4 +1,4 @@
-appengine-skeleton
+Event Calendar
 =============================
 
-This is a generated application from the appengine-skeleton archetype.
+Small webapp working on Google App Engine integrated with Spring Framework and AngularJS
