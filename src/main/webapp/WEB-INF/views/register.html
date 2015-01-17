@@ -12,13 +12,44 @@
     <link type="text/css" rel="stylesheet" href="resources/js/lib/loading-bar.min.css" />
     <link type="text/css" rel="stylesheet" href="resources/css/app.css" /> 
 
-    <title>Kalendarz wydarzeń</title>
+    <title>Kalendarz wydarzeń - rejestracja</title>
 </head>
 
-<body ng-controller="IndexController">
+<body>
 
-Nie jesteś zalogowany. <a href="dashboard">Zaloguj się</a>
-	
+<div class="userList container col-md-3">
+<form name="addUser_form" method="POST" action="register" class="form-horizontal input-border" novalidate>
+ 
+    						<div ng-hide="hideMessage" ng-class="messageStyle">
+				                   {{message}}     
+				   			</div>
+ 					<div class="form-group">
+						<div class="col-sm-12">
+    						<input
+    								class="form-control" 
+    								type="text" 
+            						placeholder="Imię" 
+            						name="forename" 
+            						required />
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+    						<input
+    								class="form-control" 
+    								type="text" 
+            						placeholder="Nazwisko" 
+            						name="surname" 
+            						required />
+            
+						</div>
+					</div>
+											 
+<button type="submit" class="btn btn-success btn-sm" ng-disabled="addUser_form.$invalid">Zarejestruj się</button>
+</form>
+</div>
+
 	
 	<!-- jQuery -->
     <script src="resources/js/lib/jquery/jquery-2.1.1.min.js"></script>

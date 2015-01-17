@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html ng-app="EventCalendar">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link type="text/css" rel="stylesheet" href="resources/css/bootstrap/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="resources/js/lib/ng-table/ng-table.min.css" />
+    <link type="text/css" rel="stylesheet" href="resources/js/lib/loading-bar.min.css" />
+    <link type="text/css" rel="stylesheet" href="resources/css/app.css" /> 
+
+    <title>Kalendarz wydarzeń - panel użytkownika</title>
+</head>
+
+<body ng-controller="EventsController">
+<div class="userList container col-md-3">
+<a href="logout">Wyloguj się</a>
+
+Lista wydarzeń:<br />
+
+		 <table ng-table="tableParams" show-filter="true" class="table"> 
+		        <tr ng-repeat="event in $data">
+
+		            <td data-title="'Nazwa'" sortable="'name'" filter="{ 'name': 'text' }">{{event.name}}</td>
+		            <td data-title="'Miejsce'" sortable="'location'" filter="{ 'location': 'text' }">{{event.location}}</td>
+
+		            <td data-title="'Operacje'">
+		            	<a ui-sref="findEventById(event.key.id)">Edytuj</a> 
+		            	<a ng-click="deleteEventById(event.key.id)">Usuń</a>
+		            </td>
+		        </tr>
+        </table>
+
+Dodaj wydarzenie: <br />
+
+<form name="addEvent_form" ng-submit="createEvent(event)" class="form-horizontal input-border" novalidate>
+ 
+    						<div ng-hide="hideMessage" ng-class="messageStyle">
+				                   {{message}}     
+				   			</div>
+ 		<div class="form-group">
+						<div class="col-sm-12">
+    						<input
+    								class="form-control" 
+    								type="text" 
+            						placeholder="Nazwa" 
+            						name="name" 
+            						ng-model="event.name" 
+            						ng-minlength=5
+            						ng-maxlength=30 
+            						ng-pattern="/^[A-Z](?=[A-Z]|[a-z]|\s|\d)/"
+            						ng-model-options="{debounce: 1000}"
+            						required />
+            						
+            				<div class="error-container" ng-show="addEvent_form.name.$dirty && addEvent_form.name.$invalid">
+							    <small class="error-message" ng-show="addEvent_form.name.$error.required">
+							    	To pole nie może być puste.</small>
+							    <small class="error-message" ng-show="
+							    !addEvent_form.name.$error.minlength
+							    && !addEvent_form.name.$error.maxlength
+							    && addEvent_form.name.$error.pattern">
+							    	Musi zaczynać się od dużej litery oraz zawierać litery lub cyfry.</small>	
+							    <small class="error-message" ng-show="
+							    	!addEvent_form.name.$error.required 
+							    	&& addEvent_form.name.$error.minlength
+									|| addEvent_form.name.$error.maxlength">
+							    	Pole musi się składać z przynajmniej 5 i niewięcej niż 30 znaków.</small>
+  							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+    						<input
+    								class="form-control" 
+    								type="text" 
+            						placeholder="Typ" 
+            						name="type" 
+            						ng-model="event.type" 
+            						ng-minlength=5
+            						ng-maxlength=30 
+            						ng-pattern="/^[A-Z](?=[A-Z]|[a-z]|\s|\d)/"
+            						ng-model-options="{debounce: 1000}"
+            						required />
+            						
+            				<div class="error-container" ng-show="addEvent_form.type.$dirty && addEvent_form.type.$invalid">
+							    <small class="error-message" ng-show="addEvent_form.type.$error.required">
+							    	To pole nie może być puste.</small>
+							    <small class="error-message" ng-show="
+							    !addEvent_form.type.$error.minlength
+							    && !addEvent_form.type.$error.maxlength
+							    && addEvent_form.type.$error.pattern">
+							    	Musi zaczynać się od dużej litery oraz zawierać litery lub cyfry.</small>	
+							    <small class="error-message" ng-show="
+							    	!addEvent_form.type.$error.required 
+							    	&& addEvent_form.type.$error.minlength
+									|| addEvent_form.type.$error.maxlength">
+							    	Pole musi się składać z przynajmniej 5 i niewięcej niż 30 znaków.</small>
+  							</div>
+						</div>
+					</div>
+								
+			 <div class="form-group">
+        		<div class="col-sm-12">
+			      <input class="form-control" ng-model="event.startDate" data-autoclose="1" placeholder="Data rozpoczęcia" bs-datepicker type="text" required>
+			    </div>
+    		 </div>
+    		 
+			<div class="form-group">
+        		<div class="col-sm-12">
+			      <input class="form-control" ng-model="event.startDate" data-autoclose="1" placeholder="Godzina rozpoczęcia" bs-timepicker type="text" required> 
+     			</div>
+    		</div>
+ 
+  			<div class="form-group">
+        		<div class="col-sm-12">
+			      <input class="form-control" ng-model="event.endDate" data-autoclose="1" placeholder="Data zakończenia" bs-datepicker type="text" required>
+			    </div>
+    		 </div>
+    		 
+			<div class="form-group">
+        		<div class="col-sm-12">
+			      <input class="form-control" ng-model="event.endDate" data-autoclose="1" placeholder="Godzina zakończenia" bs-timepicker type="text" required> 
+     			</div>
+    		</div>
+    		
+    		<div class="form-group">
+						<div class="col-sm-12">
+    						<input
+    								class="form-control" 
+    								type="text" 
+            						placeholder="Miejsce" 
+            						name="location" 
+            						ng-model="event.location" 
+            						ng-minlength=5
+            						ng-maxlength=30 
+            						ng-pattern="/^[A-Z](?=[A-Z]|[a-z]|\s|\d)/"
+            						ng-model-options="{debounce: 1000}"
+            						required />
+            						
+            				<div class="error-container" ng-show="addEvent_form.type.$dirty && addEvent_form.type.$invalid">
+							    <small class="error-message" ng-show="addEvent_form.type.$error.required">
+							    	To pole nie może być puste.</small>
+							    <small class="error-message" ng-show="
+							    !addEvent_form.type.$error.minlength
+							    && !addEvent_form.type.$error.maxlength
+							    && addEvent_form.type.$error.pattern">
+							    	Musi zaczynać się od dużej litery oraz zawierać litery lub cyfry.</small>	
+							    <small class="error-message" ng-show="
+							    	!addEvent_form.type.$error.required 
+							    	&& addEvent_form.type.$error.minlength
+									|| addEvent_form.type.$error.maxlength">
+							    	Pole musi się składać z przynajmniej 5 i niewięcej niż 30 znaków.</small>
+  							</div>
+						</div>
+						</div>
+
+    <button type="submit" class="btn btn-success btn-sm" ng-disabled="addEvent_form.$invalid">Utwórz wydarzenie</button>
+</form>
+</div>
+	
+	
+	<!-- jQuery -->
+    <script src="resources/js/lib/jquery/jquery-2.1.1.min.js"></script>
+    
+    <!-- lodash -->
+    <script src="resources/js/lib/lodash/lodash.min.js"></script>   
+    
+    <!-- AngularJS -->
+	<script src="resources/js/lib/angularjs/angular.js"></script>
+	<script src="resources/js/lib/angularjs/angular-locale_pl-pl.js"></script>
+	<script src="resources/js/lib/angularjs/restangular.min.js"></script>
+	<script src="resources/js/lib/loading-bar.min.js"></script>
+	
+	<!-- UI-Boostrap -->
+	<script src="resources/js/lib/ui-bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+	
+	<!-- Angular-Strap -->
+	<script src="resources/js/lib/angular-strap/angular-strap.min.js"></script>
+	<script src="resources/js/lib/angular-strap/angular-strap.tpl.min.js"></script>
+	
+	<!-- ng-table -->
+	<script src="resources/js/lib/ng-table/ng-table.min.js"></script>
+	
+	<!-- Angular - główne skrypty -->
+	<script src="resources/js/modules/App.js"></script>
+</body>
+</html>

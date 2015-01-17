@@ -1,9 +1,12 @@
-var App = angular.module('EventCalendar', ['restangular','mgcrea.ngStrap']);
+var App = angular.module('EventCalendar', ['restangular','mgcrea.ngStrap','ngTable']);
 
+App.controller('IndexController', ['$scope','$http','Restangular', function($scope, $http, Restangular) {
+		
+}]);
 
-App.controller('EventsController', ['$scope','$http','Restangular', function($scope, $http, Restangular) {
+App.controller('EventsController', ['$scope','$http','Restangular', '$filter', 'ngTableParams', function($scope, $http, Restangular, $filter, ngTableParams) {
 	
-	$scope.events = '';
+	var data = '';
 	
 	$scope.event = '';
 
@@ -21,7 +24,8 @@ App.controller('EventsController', ['$scope','$http','Restangular', function($sc
 	$scope.findAllEvents = function() {
 
 		Restangular.one('events').getList().then(function(response){			
-			$scope.events = response;	
+			data = response;	
+			$scope.tableParams.reload();
 		}, function(error) {
 			  $scope.error = error.data; 
 			  
@@ -47,5 +51,24 @@ App.controller('EventsController', ['$scope','$http','Restangular', function($sc
 	}
 
 	$scope.findAllEvents();	
+	
+	$scope.tableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 10,          // count per page
+        sorting: {
+            name: 'asc'     // initial sorting
+        }
+    }, {
+        total: data.length, // length of data
+        getData: function($defer, params) {
+        	        	
+        	var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
+        	var filteredData = params.filter() ? $filter('filter')(orderedData, params.filter()) : orderedData; 
+        	
+        	params.total(filteredData.length); // set total for recalc pagination
+        	
+            $defer.resolve(filteredData.slice((params.page() - 1) * params.count(), params.page() * params.count()));          
+        }
+   });	
 }]);
 
