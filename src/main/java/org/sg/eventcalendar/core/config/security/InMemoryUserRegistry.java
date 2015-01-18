@@ -1,4 +1,4 @@
-package org.sg.eventcalendar.core.models;
+package org.sg.eventcalendar.core.config.security;
 
 import java.util.Collections;
 import java.util.HashMap;

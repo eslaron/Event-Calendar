@@ -1,4 +1,4 @@
-package org.sg.eventcalendar.core.models;
+package org.sg.eventcalendar.core.config.security;
 
 /**
  *

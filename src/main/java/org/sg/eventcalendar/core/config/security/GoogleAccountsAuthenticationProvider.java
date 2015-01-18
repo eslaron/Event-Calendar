@@ -1,4 +1,4 @@
-package org.sg.eventcalendar.core.config;
+package org.sg.eventcalendar.core.config.security;
 
 import com.google.appengine.api.users.User;
 import org.springframework.context.MessageSource;
@@ -10,8 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-import org.sg.eventcalendar.core.models.GaeUser;
-import org.sg.eventcalendar.core.models.UserRegistry;
 
 /**
  * A simple authentication provider which interacts with {@code User} returned by the GAE {@code UserService},

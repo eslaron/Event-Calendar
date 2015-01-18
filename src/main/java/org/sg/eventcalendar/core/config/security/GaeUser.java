@@ -1,10 +1,9 @@
-package org.sg.eventcalendar.core.models;
+package org.sg.eventcalendar.core.config.security;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
-import org.sg.eventcalendar.core.config.AppRole;
 
 /**
  * Custom user object for the application.

@@ -14,7 +14,7 @@ public interface IGenericDao < T extends Serializable > {
 	
 	public T findOneById(Object pk);
 	
-	public void update();
+	public void update(Object entity);
 	
 	public void delete(Object entity);  
 

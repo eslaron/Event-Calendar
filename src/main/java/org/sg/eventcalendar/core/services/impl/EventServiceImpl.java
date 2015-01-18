@@ -41,8 +41,8 @@ public class EventServiceImpl implements IEventService {
 	}
 
 	@Override
-	public void updateEvent() {
-		dao.update();
+	public void updateEvent(Event entity) {
+		dao.update(entity);
 	}
 
 	@Override

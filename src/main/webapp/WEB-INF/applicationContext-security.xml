@@ -19,9 +19,9 @@
         <custom-filter position="PRE_AUTH_FILTER" ref="gaeFilter" />
     </http>
 
-    <b:bean id="gaeEntryPoint" class="org.sg.eventcalendar.core.config.GoogleAccountsAuthenticationEntryPoint" />
+    <b:bean id="gaeEntryPoint" class="org.sg.eventcalendar.core.config.security.GoogleAccountsAuthenticationEntryPoint" />
 
-    <b:bean id="gaeFilter" class=" org.sg.eventcalendar.core.config.GaeAuthenticationFilter">
+    <b:bean id="gaeFilter" class=" org.sg.eventcalendar.core.config.security.GaeAuthenticationFilter">
         <b:property name="authenticationManager" ref="authenticationManager"/>
         <b:property name="failureHandler">
             <b:bean class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
@@ -38,10 +38,10 @@
         <authentication-provider ref="gaeAuthenticationProvider"/>
     </authentication-manager>
 
-    <b:bean id="gaeAuthenticationProvider" class="org.sg.eventcalendar.core.config.GoogleAccountsAuthenticationProvider">
+    <b:bean id="gaeAuthenticationProvider" class="org.sg.eventcalendar.core.config.security.GoogleAccountsAuthenticationProvider">
         <b:property name="userRegistry" ref="userRegistry" />
     </b:bean>
 
-    <b:bean id="userRegistry" class="org.sg.eventcalendar.core.models.GaeDatastoreUserRegistry" />
+    <b:bean id="userRegistry" class="org.sg.eventcalendar.core.config.security.GaeDatastoreUserRegistry" />
 
 </b:beans>

@@ -11,7 +11,7 @@ public interface IEventService {
 	
 	public Event findEventById(long id);
 	
-	public void updateEvent();
+	public void updateEvent(Event entity);
 	
 	public void deleteEvent(Event entity);  
 

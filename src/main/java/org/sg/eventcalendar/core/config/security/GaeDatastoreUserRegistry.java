@@ -1,4 +1,4 @@
-package org.sg.eventcalendar.core.models;
+package org.sg.eventcalendar.core.config.security;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -8,7 +8,6 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sg.eventcalendar.core.config.AppRole;
 import java.util.*;
 
 /**

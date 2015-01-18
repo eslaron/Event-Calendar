@@ -1,4 +1,4 @@
-package org.sg.eventcalendar.core.config;
+package org.sg.eventcalendar.core.config.security;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -23,7 +23,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.util.Assert;
 import org.springframework.web.filter.GenericFilterBean;
-import org.sg.eventcalendar.core.models.GaeUser;
 
 /**
  * @author Luke Taylor

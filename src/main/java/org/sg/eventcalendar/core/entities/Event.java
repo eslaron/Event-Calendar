@@ -22,7 +22,9 @@ public class Event extends BaseEntity implements Serializable {
     
     private Boolean status;
     
-    public Event() {}
+    private String userNickname;
+
+	public Event() {}
     
     public String getName() {
 		return name;
@@ -70,5 +72,13 @@ public class Event extends BaseEntity implements Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+	  
+    public String getUserNickname() {
+		return userNickname;
+	}
+
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
 	}
 }

@@ -1,4 +1,4 @@
-package org.sg.eventcalendar.core.config;
+package org.sg.eventcalendar.core.config.security;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

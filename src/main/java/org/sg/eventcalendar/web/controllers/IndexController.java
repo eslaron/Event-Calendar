@@ -7,10 +7,10 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.sg.eventcalendar.core.config.AppRole;
-import org.sg.eventcalendar.core.config.GaeUserAuthentication;
-import org.sg.eventcalendar.core.models.GaeUser;
-import org.sg.eventcalendar.core.models.UserRegistry;
+import org.sg.eventcalendar.core.config.security.AppRole;
+import org.sg.eventcalendar.core.config.security.GaeUser;
+import org.sg.eventcalendar.core.config.security.GaeUserAuthentication;
+import org.sg.eventcalendar.core.config.security.UserRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

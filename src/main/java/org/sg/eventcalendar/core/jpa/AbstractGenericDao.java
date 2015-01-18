@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.sg.eventcalendar.core.config.EMF;
 
 public abstract class AbstractGenericDao< T extends Serializable > {
 
@@ -47,10 +46,10 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 		}     
     }  	 
 	
-	public void update() {  
+	public void update(Object entity) {  
 	    EntityManager em = this.getEM();  
 	    try{  
-	        em.createQuery(clazz.getName()).executeUpdate();  
+	    	em.merge(entity);
 	    }finally{  
 	        em.close();  
 	    }  

@@ -1,4 +1,4 @@
-package org.sg.eventcalendar.core.config;
+package org.sg.eventcalendar.core.config.security;
 
 import org.springframework.security.core.GrantedAuthority;
 

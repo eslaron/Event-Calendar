@@ -1,10 +1,9 @@
-package org.sg.eventcalendar.core.config;
+package org.sg.eventcalendar.core.config.security;
 
 import java.util.Collection;
 import java.util.HashSet;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.sg.eventcalendar.core.models.GaeUser;
 
 /**
  * Authentication object representing a fully-authenticated user.

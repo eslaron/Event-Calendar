@@ -1,4 +1,15 @@
-var App = angular.module('EventCalendar', ['restangular','mgcrea.ngStrap','ngTable']);
+var App = angular.module('EventCalendar', ['restangular','mgcrea.ngStrap','ngTable'])
+
+
+.config(['RestangularProvider', function(RestangularProvider){
+	
+	RestangularProvider.setRequestInterceptor(function(elem, operation) {
+		  if (operation === "remove") {
+		     return undefined;
+		  } 
+		  return elem;
+	});
+}])
 
 App.controller('IndexController', ['$scope','$http','Restangular', function($scope, $http, Restangular) {
 		
@@ -34,7 +45,7 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 
 	$scope.findEventById = function(id) {
 		
-		Restangular.one('events').get().then(function(response){		
+		Restangular.one('events', id).get().then(function(response){		
 			$scope.event = response;		
 		}, function(error) {
 			  $scope.error = error.data; 
@@ -43,11 +54,35 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 	}
 		
 	$scope.updateEvent = function(event) {
-	
+		
+		var UpdateEvent = Restangular.one('events');
+
+		UpdateEvent.id =  $scope.event.id;
+		UpdateEvent.name = $scope.event.name;
+		UpdateEvent.type = $scope.event.type;
+		UpdateEvent.startDate = $scope.event.startDate;
+		UpdateEvent.endDate = $scope.event.endDate;
+		UpdateEvent.location = $scope.event.location;
+		UpdateEvent.status = $scope.event.status;
+
+		UpdateEvent.put().then(function(response) {
+				
+		},function(error) {
+			$scope.error = error.data; 					
+	 	});	
 	}
 	
 	$scope.deleteEventById = function(id) {
+
+		var DeleteEvent = Restangular.one('events');
 		
+		DeleteEvent.id = id;
+		
+		DeleteEvent.remove().then(function(response) {
+				
+		},function(error) {
+			$scope.error = error.data; 					
+	 	});
 	}
 
 	$scope.findAllEvents();	

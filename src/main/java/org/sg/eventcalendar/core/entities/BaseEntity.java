@@ -13,15 +13,17 @@ import com.google.appengine.api.datastore.Key;
 @MappedSuperclass
 public abstract class BaseEntity {
 	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Key key;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	public void setKey(Key key) {
-		this.key = key;
+	public Long getId() {
+		return id;
 	}
 
-	public Key getKey() {
-		return key;
+	public void setId(Long id) {
+		this.id = id;
 	}
+
+
 }

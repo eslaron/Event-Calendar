@@ -1,4 +1,4 @@
-package org.sg.eventcalendar.core.config;
+package org.sg.eventcalendar.core.jpa;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
