@@ -13,9 +13,11 @@ var App = angular.module('EventCalendar', ['restangular','mgcrea.ngStrap','ngTab
 
 App.controller('EventsController', ['$scope','$http','Restangular', '$filter', 'ngTableParams', function($scope, $http, Restangular, $filter, ngTableParams) {
 	
-	var data = '';
+	var data = [];
 	
 	$scope.event = '';
+	
+	$scope.currentUser = '';
 	
 	$scope.hideTable = false;
 	$scope.hideAdd = true;
@@ -42,6 +44,15 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 		$scope.hideEdit = false;		
 	}
 	
+	$scope.getCurrentUser = function() {
+		
+		Restangular.one('currentUser').get().then(function(response){		
+			$scope.currentUser = response;		
+		}, function(error) {
+			  $scope.error = error.data; 
+			  
+		});
+	} 
 	
 	$scope.createEvent = function(event) {
 		
@@ -56,8 +67,13 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 		
 	$scope.findAllEvents = function() {
 
-		Restangular.one('events').getList().then(function(response){			
-			data = response;	
+		Restangular.one('events').getList().then(function(response){	
+			
+			for(var i=0;i<response.length;i++) {
+				if(response[i].userNickname == $scope.currentUser.nickname)
+					data.push(response[i]);
+			}
+
 			$scope.tableParams.reload();
 		}, function(error) {
 			  $scope.error = error.data; 
@@ -106,7 +122,8 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 			$scope.error = error.data; 					
 	 	});
 	}
-
+	
+	$scope.getCurrentUser();	
 	$scope.findAllEvents();	
 	
 	$scope.tableParams = new ngTableParams({
