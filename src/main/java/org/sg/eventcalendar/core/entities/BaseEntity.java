@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import com.google.appengine.api.datastore.Key;
-
 @Entity
 @MappedSuperclass
 public abstract class BaseEntity {
@@ -24,6 +22,4 @@ public abstract class BaseEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 }

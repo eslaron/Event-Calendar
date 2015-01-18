@@ -24,8 +24,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 @Controller
 @RequestMapping(value = "/")
 public class IndexController {
-	
-	
+		
 	@Autowired
 	private UserRegistry registry;
 
@@ -39,14 +38,14 @@ public class IndexController {
         return "register";
     }
 
-	@RequestMapping(value = "dashboard")
-	public String getSecretPage() {
-		return "dashboard";
-	}
-
 	@RequestMapping(value = "disabled")
 	public String getDisabledPage() {
 		return "disabled";
+	}
+	
+	@RequestMapping(value = "dashboard")
+	public String getDashboardPage() {
+		return "dashboard";
 	}
 
 	@RequestMapping(value="register", method = RequestMethod.POST)

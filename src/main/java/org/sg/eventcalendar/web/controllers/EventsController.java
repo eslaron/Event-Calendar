@@ -1,8 +1,10 @@
 package org.sg.eventcalendar.web.controllers;
 
 import java.util.List;
+
 import org.sg.eventcalendar.core.config.security.GaeUser;
 import org.sg.eventcalendar.core.entities.Event;
+import org.sg.eventcalendar.core.services.IEmailService;
 import org.sg.eventcalendar.core.services.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ public class EventsController {
 
 	@Autowired
 	IEventService eventService;
+	
+	@Autowired
+	IEmailService emailService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> create(@RequestBody Event data) {
@@ -38,6 +43,11 @@ public class EventsController {
     	data.setUserNickname(currentUser.getNickname());
     	
     	eventService.createEvent(data);
+    	
+    	String content="Wydarzenie o nazwie "+data.getName()+" odbędzie się w dniu "+data.getStartDate().getDate();
+   
+    	emailService.sendEMail(currentUser.getEmail(), "Kalendarz wydarzeń - Nowe wydarzenie", content);
+    	
     	JsonObject jsonResponse = new JsonObject();
 		jsonResponse.addProperty("message", message);
 		return new ResponseEntity<String>(jsonResponse.toString(), responseStatus);
@@ -56,7 +66,7 @@ public class EventsController {
     @RequestMapping(value ="/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<String> updateEvent(@RequestBody Event data) {
     	
-    	message = "participantUpdated";
+    	message = "eventUpdated";
     	HttpStatus responseStatus = HttpStatus.OK;
 
      	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

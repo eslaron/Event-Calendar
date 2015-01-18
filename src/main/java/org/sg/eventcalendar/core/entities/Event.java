@@ -20,9 +20,9 @@ public class Event extends BaseEntity implements Serializable {
     
     private String location;
     
-    private Boolean status;
+    private String status;
     
-    private String userNickname;
+	private String userNickname;
 
 	public Event() {}
     
@@ -66,11 +66,11 @@ public class Event extends BaseEntity implements Serializable {
 		this.location = location;
 	}
 
-	public Boolean getStatus() {
+    public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	  
