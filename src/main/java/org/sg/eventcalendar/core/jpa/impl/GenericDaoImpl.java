@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 /**
- * The Class GenericDaoImpl.
+ * Klasa dziedzicząca po AbstractGenericDao i implementująca interfejs IGenericDao
  *
- * @param <T> the generic type
+ * @param <T> typ generyczny
  */
 @Repository
 @Scope("prototype")

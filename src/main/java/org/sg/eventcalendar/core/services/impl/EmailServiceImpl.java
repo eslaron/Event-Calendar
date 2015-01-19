@@ -12,12 +12,24 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import java.util.Properties;
 
+/**
+ * Implementacja interfejsu EmailService
+ */
 @Service
 public class EmailServiceImpl implements IEmailService {
 	
+	/** Pole z właściwościami */
 	Properties props = new Properties();
+	
+	/** Obiekt zawierający sesję */
 	Session session = Session.getDefaultInstance(props, null);
 
+	/**
+	 * Implementacja metody wysyłącej email
+	 * @param email adres email odbiorcy
+	 * @param subject temat wiadmości
+	 * @param content treść
+	 */
 	@Override
 	public void  sendEMail(String email, String subject, String content) {
 		

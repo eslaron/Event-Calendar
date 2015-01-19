@@ -5,40 +5,38 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class AbstractGenericDao.
+ * Klasa zawierająca metody generyczne, wykonujące operacje na bazie danych. Można zastosować je do obiektow każdej klasy.
  *
- * @param <T> the generic type
+ * @param <T> typ generyczny
  */
 public abstract class AbstractGenericDao< T extends Serializable > {
 
-	/** The clazz. */
+	/** Pole zawierające dowolną klasę */
 	private Class< T > clazz;
 	
 	/**
-	 * Sets the clazz.
+	 * Setter dla pola clazz
 	 *
-	 * @param clazzToSet the new clazz
+	 * @param clazzToSet
 	 */
 	public void setClazz( Class< T > clazzToSet ){
 	      this.clazz = clazzToSet;
 	}
 	
     /**
-     * Gets the em.
+     * Getter dla instancji Entity Managera
      *
-     * @return the em
+     * @return EntityManager
      */
     public EntityManager getEM(){  
        return  EMF.get().createEntityManager();  
     }  
   	 
 	/**
-	 * Creates the.
+	 * Tworzy nową encję w bazie danych.
 	 *
-	 * @param entity the entity
+	 * @param entity obiekt dowolnej klasy
 	 */
 	public void create(Object entity) {  
 	    EntityManager em = this.getEM();  
@@ -50,9 +48,9 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 	}  
 	 
 	/**
-	 * Find all.
+	 * Znajduje wszystkie encje danego typu
 	 *
-	 * @return the list
+	 * @return List<T> lista dowolnego typu
 	 */
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {  
@@ -65,10 +63,10 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 	}  
 
 	/**
-	 * Find one by id.
+	 * Znajduje encję po id
 	 *
-	 * @param pk the pk
-	 * @return the t
+	 * @param pk obiekt zawierający klucz (primary key)
+	 * @return (T) obiekt dowolnego typu
 	 */
 	public T findOneById(Object pk) {  
 		EntityManager em = this.getEM();  
@@ -80,9 +78,9 @@ public abstract class AbstractGenericDao< T extends Serializable > {
     }  	 
 	
 	/**
-	 * Update.
+	 * Aktualizuje daną encję
 	 *
-	 * @param entity the entity
+	 * @param entity obiekt dowolnej klasy
 	 */
 	public void update(Object entity) {  
 	    EntityManager em = this.getEM();  
@@ -94,9 +92,9 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 	} 
 	
 	/**
-	 * Delete.
+	 * Usuwa daną encję
 	 *
-	 * @param entity the entity
+	 * @param entity obiekt dowolnej klasy
 	 */
 	public void delete(Object entity) {  
 	    EntityManager em = this.getEM();  
@@ -108,9 +106,9 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 	}  
 
 	/**
-	 * Delete by id.
+	 * Usuwa encję po id
 	 *
-	 * @param pk the pk
+	 * @param pk obiekt dowolnej klasy zawierający klucz (primary key)
 	 */
 	public void deleteById(Object pk) {  
 	    EntityManager em = this.getEM();  

@@ -19,18 +19,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonObject;
 
+/**
+ * Klasa kontroler wydarzeń
+ */
 @RestController
 @RequestMapping("/events")
 public class EventsController {
 	
+	/** Komunikat. */
 	String message = "";	
 
+	/** Odwołanie do IEventservice */
 	@Autowired
 	IEventService eventService;
 	
+	/** Odwołanie do IEmailservice */
 	@Autowired
 	IEmailService emailService;
 
+    /**
+     * Ządanie POST tworzące nową encję klasy Event
+     *
+     * @param data dane przesłane do serwera
+     * @return response entity odpowiedź dla frontendu
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> create(@RequestBody Event data) {
 
@@ -54,16 +66,33 @@ public class EventsController {
 		return new ResponseEntity<String>(jsonResponse.toString(), responseStatus);
 	}
     
+    /**
+     * Ządanie GET znajdujące wszystkie wydarzenia.
+     *
+     * @return List<Event>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public List<Event> findAllEvents(){
        return eventService.findAllEvents();
     }
     
+    /**
+     * Ządanie GET znajdujące wydarzenie po id.
+     *
+     * @param id
+     * @return obiekt klasy Event
+     */
     @RequestMapping(value ="/{id}", method = RequestMethod.GET)
     public Event findEventById(@PathVariable long id){
        return eventService.findEventById(id);
     }
         
+    /**
+     * Ządanie PUT aktualizującę daną encję
+     *
+     * @param data dane przesyłane do serwera
+     * @return the response entity odpowiedź dla frontendu
+     */
     @RequestMapping(value ="/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<String> updateEvent(@RequestBody Event data) {
     	
@@ -87,6 +116,12 @@ public class EventsController {
 			return new ResponseEntity<String>(jsonResponse.toString(), responseStatus);
 	}
     
+    /**
+     * Ządanie DELETE usuwające encję klasy Event.
+     *
+     * @param id
+     * @return the response entity odpowiedź dla frontendu
+     */
     @RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> deleteEventById(@PathVariable long id) {
     	

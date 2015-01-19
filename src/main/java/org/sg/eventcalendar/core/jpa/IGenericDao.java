@@ -4,68 +4,67 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IGenericDao.
+ * Publiczny interfejs dla GenericDao
  *
- * @param <T> the generic type
+ * @param <T> typ generyczny
  */
 public interface IGenericDao < T extends Serializable > {
 		
 	/**
-	 * Sets the clazz.
+	 * Setter dla pola clazz
 	 *
-	 * @param clazz the new clazz
+	 * @param clazzToSet
 	 */
 	public void setClazz(Class<T> clazz);
 
 	/**
-	 * Creates the.
+	 * Tworzy nową encję w bazie danych.
 	 *
-	 * @param entity the entity
+	 * @param entity obiekt dowolnej klasy
 	 */
 	public void create(Object entity);  
     
 	/**
-	 * Find all.
+	 * Znajduje wszystkie encje danego typu
 	 *
-	 * @return the list
+	 * @return List<T> lista dowolnego typu
 	 */
 	public List<T> findAll(); 
 	
 	/**
-	 * Find one by id.
+	 * Znajduje encję po id
 	 *
-	 * @param pk the pk
-	 * @return the t
+	 * @param pk obiekt zawierający klucz (primary key)
+	 * @return (T) obiekt dowolnego typu
 	 */
 	public T findOneById(Object pk);
 	
 	/**
-	 * Update.
+	 * Aktualizuje daną encję
 	 *
-	 * @param entity the entity
+	 * @param entity obiekt dowolnej klasy
 	 */
 	public void update(Object entity);
 	
 	/**
-	 * Delete.
+	 * Usuwa daną encję
 	 *
-	 * @param entity the entity
+	 * @param entity obiekt dowolnej klasy
 	 */
 	public void delete(Object entity);  
 
-    /**
-     * Delete by id.
-     *
-     * @param pk the pk
-     */
+	/**
+	 * Usuwa encję po id
+	 *
+	 * @param pk obiekt dowolnej klasy zawierający klucz (primary key)
+	 */
     public void deleteById(Object pk);
     
     /**
-     * Gets the em.
+     * Pobiera instację Entity Managera
      *
-     * @return the em
+     * @return EntityManager
      */
     public EntityManager getEM(); 
 } 

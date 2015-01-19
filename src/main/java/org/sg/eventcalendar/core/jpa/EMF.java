@@ -3,24 +3,23 @@ package org.sg.eventcalendar.core.jpa;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class EMF.
+ * Klasa inicjalizująca instancję EntityManagera
  */
 public class EMF {
 	
-    /** The Constant emfInstance. */
+    /** Pole zawierające instancję Entity Managera */
     private static final EntityManagerFactory emfInstance = Persistence.createEntityManagerFactory("transactions-optional");
     
     /**
-     * Instantiates a new emf.
+     * Inicjalizuje nowy obiekt EMF
      */
     public EMF() {}
      
     /**
-     * Gets the.
+     * Getter dla instancji Entity Managera.
      *
-     * @return the entity manager factory
+     * @return emfInstance instancja Entity Managera
      */
     public static EntityManagerFactory get() {
         return emfInstance;

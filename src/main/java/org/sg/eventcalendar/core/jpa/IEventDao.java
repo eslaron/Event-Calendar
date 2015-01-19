@@ -1,16 +1,15 @@
 package org.sg.eventcalendar.core.jpa;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IEventDao.
+ * Publiczny interfejs dla EventDao
  */
 public interface IEventDao {
 	
 	/**
-	 * Delete event by status.
+	 * Usuwa wydarzenie według danego statusu.
 	 *
-	 * @param status the status
+	 * @param status status wydarzenia(niezakończone, w trakcie, zakończone)
 	 */
 	public void deleteEventByStatus(String status);
 	

@@ -6,25 +6,25 @@ import org.sg.eventcalendar.core.jpa.EMF;
 import org.sg.eventcalendar.core.jpa.IEventDao;
 import org.springframework.stereotype.Repository;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class EventDaoImpl.
+ * Implementacja klasy EventDao
  */
 @Repository
 public class EventDaoImpl implements IEventDao {
 
-	  /**
-  	 * Gets the em.
-  	 *
-  	 * @return the em
-  	 */
+    /**
+     * Getter dla instancji Entity Managera
+     *
+     * @return EntityManager
+     */
   	public EntityManager getEM(){  
 	       return  EMF.get().createEntityManager();  
 	  } 
 	
-	/* (non-Javadoc)
-	 * @see org.sg.eventcalendar.core.jpa.IEventDao#deleteEventByStatus(java.lang.String)
-	 */
+  	/**
+  	 * Implementacja metody usuwajacej encję według statusu
+  	 * @param status status wydarzenia(niezakończone, w trakcie, zakończone) 
+  	 */
 	@Override
 	public void deleteEventByStatus(String status) {
 		 EntityManager em = this.getEM();  
