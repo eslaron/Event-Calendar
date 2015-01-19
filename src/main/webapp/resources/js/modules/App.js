@@ -54,11 +54,13 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 		});
 	} 
 	
-	$scope.createEvent = function(event) {
+	$scope.createEvent = function(addEvent) {
 		
-		$scope.event.status = 'Niezakończone';
+		$scope.addEvent.status = 'Niezakończone';
 				
-		Restangular.all('events').post($scope.event).then(function(response){
+		Restangular.all('events').post($scope.addEvent).then(function(response){
+			data = [];
+			$scope.findAllEvents();
 			$scope.tableParams.reload();
 		}, function(error) {
 			  $scope.error = error.data; 		  
@@ -69,11 +71,20 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 
 		Restangular.one('events').getList().then(function(response){	
 			
+			var d = new Date();
+			
 			for(var i=0;i<response.length;i++) {
-				if(response[i].userNickname == $scope.currentUser.nickname)
-					data.push(response[i]);
-			}
+				if(response[i].userNickname == $scope.currentUser.nickname)	{
+					if (response[i].endDate < d.getTime())
+						response[i].status = "Zakończone";
+					
+					if (response[i].startDate < d.getTime() 
+							&& response[i].endDate > d.getTime()) 
+						response[i].status = "W trakcie";
 
+					data.push(response[i]);
+				}				
+			}
 			$scope.tableParams.reload();
 		}, function(error) {
 			  $scope.error = error.data; 
@@ -104,6 +115,8 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 		UpdateEvent.status = $scope.event.status;
 
 		UpdateEvent.put().then(function(response) {
+			data = [];
+			$scope.findAllEvents();
 			$scope.tableParams.reload();	
 		},function(error) {
 			$scope.error = error.data; 					
@@ -117,6 +130,8 @@ App.controller('EventsController', ['$scope','$http','Restangular', '$filter', '
 		DeleteEvent.id = id;
 		
 		DeleteEvent.remove().then(function(response) {
+			data = [];
+			$scope.findAllEvents();
 			$scope.tableParams.reload();	
 		},function(error) {
 			$scope.error = error.data; 					

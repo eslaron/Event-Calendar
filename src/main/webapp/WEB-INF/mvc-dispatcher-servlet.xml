@@ -16,11 +16,12 @@
 	<bean class="org.sg.eventcalendar.web.controllers.EventsController"></bean>
 	
 	<context:annotation-config />
+	<bean class="org.sg.eventcalendar.core.jpa.EMF"></bean>
 	
 	<bean class="org.sg.eventcalendar.core.services.impl.EventServiceImpl" autowire="byType"></bean>
 	<bean class="org.sg.eventcalendar.core.services.impl.EmailServiceImpl" autowire="byType"></bean>
-	<bean class="org.sg.eventcalendar.core.jpa.EMF"></bean>
 	<bean class="org.sg.eventcalendar.core.jpa.impl.GenericDaoImpl" autowire="byName"></bean>
+	<bean class="org.sg.eventcalendar.core.jpa.impl.EventDaoImpl" autowire="byType"></bean>
 	
 	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
   		<property name="prefix" value="/WEB-INF/views/" />

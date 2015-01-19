@@ -11,6 +11,7 @@ import org.sg.eventcalendar.core.config.security.AppRole;
 import org.sg.eventcalendar.core.config.security.GaeUser;
 import org.sg.eventcalendar.core.config.security.GaeUserAuthentication;
 import org.sg.eventcalendar.core.config.security.UserRegistry;
+import org.sg.eventcalendar.core.services.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +29,9 @@ public class IndexController {
 		
 	@Autowired
 	private UserRegistry registry;
+	
+	@Autowired
+	IEmailService emailService;
 
 	@RequestMapping
 	public String getIndexPage() {
@@ -64,6 +68,10 @@ public class IndexController {
 	             forename, surname, roles, true);
 
 	    registry.registerUser(user);
+	    
+	    String content = "Właśnie dokonałeś rejestracji w systemie. Od teraz możesz korzystać "
+	    		+ "z aplikacji logując się za pomocą swojego konta Google.";
+	    emailService.sendEMail(currentUser.getEmail(),"Witaj w aplikacji 'Kalendarz wydarzeń'", content);
 
 	    // Update the context with the full authentication
 	    SecurityContextHolder.getContext().setAuthentication(new GaeUserAuthentication(user, authentication.getDetails()));

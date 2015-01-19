@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link type="text/css" rel="stylesheet" href="resources/css/bootstrap/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.min.css" />
@@ -12,13 +12,34 @@
     <link type="text/css" rel="stylesheet" href="resources/js/lib/loading-bar.min.css" />
     <link type="text/css" rel="stylesheet" href="resources/css/app.css" /> 
 
-    <title>Kalendarz wydarzeń - rejestracja</title>
+    <title>Kalendarz wydarzeń - Rejestracja</title>
 </head>
 
-<body>
+<body ng-controller="EventsController">
 
-<div class="userList container col-md-3">
-<form name="addUser_form" method="POST" action="register" class="form-horizontal input-border" novalidate>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Kalendarz wydarzeń</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav"> 
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+<form name="addUser_form" method="POST" action="register" class="form-horizontal input-border col-lg-4" novalidate>
  
     						<div ng-hide="hideMessage" ng-class="messageStyle">
 				                   {{message}}     
@@ -48,9 +69,15 @@
 											 
 <button type="submit" class="btn btn-success btn-sm" ng-disabled="addUser_form.$invalid">Zarejestruj się</button>
 </form>
-</div>
+    </div>
+    </div>
+    <br />
+     <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; 2015 Sebastian Sobiech, Mateusz Gotkowski</p>
+      </div>
+    </footer>
 
-	
 	<!-- jQuery -->
     <script src="resources/js/lib/jquery/jquery-2.1.1.min.js"></script>
     

@@ -6,18 +6,40 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractGenericDao.
+ *
+ * @param <T> the generic type
+ */
 public abstract class AbstractGenericDao< T extends Serializable > {
 
+	/** The clazz. */
 	private Class< T > clazz;
 	
+	/**
+	 * Sets the clazz.
+	 *
+	 * @param clazzToSet the new clazz
+	 */
 	public void setClazz( Class< T > clazzToSet ){
 	      this.clazz = clazzToSet;
 	}
 	
+    /**
+     * Gets the em.
+     *
+     * @return the em
+     */
     public EntityManager getEM(){  
        return  EMF.get().createEntityManager();  
     }  
   	 
+	/**
+	 * Creates the.
+	 *
+	 * @param entity the entity
+	 */
 	public void create(Object entity) {  
 	    EntityManager em = this.getEM();  
 	    try{  
@@ -27,6 +49,11 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 	    }         
 	}  
 	 
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 */
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {  
 		EntityManager em = this.getEM();  
@@ -37,6 +64,12 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 		}  
 	}  
 
+	/**
+	 * Find one by id.
+	 *
+	 * @param pk the pk
+	 * @return the t
+	 */
 	public T findOneById(Object pk) {  
 		EntityManager em = this.getEM();  
 		try{  
@@ -46,6 +79,11 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 		}     
     }  	 
 	
+	/**
+	 * Update.
+	 *
+	 * @param entity the entity
+	 */
 	public void update(Object entity) {  
 	    EntityManager em = this.getEM();  
 	    try{  
@@ -55,6 +93,11 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 	    }  
 	} 
 	
+	/**
+	 * Delete.
+	 *
+	 * @param entity the entity
+	 */
 	public void delete(Object entity) {  
 	    EntityManager em = this.getEM();  
 	    try{  
@@ -64,6 +107,11 @@ public abstract class AbstractGenericDao< T extends Serializable > {
 	    }         
 	}  
 
+	/**
+	 * Delete by id.
+	 *
+	 * @param pk the pk
+	 */
 	public void deleteById(Object pk) {  
 	    EntityManager em = this.getEM();  
 	    try{  

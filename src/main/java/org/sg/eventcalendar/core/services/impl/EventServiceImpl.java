@@ -3,6 +3,7 @@ package org.sg.eventcalendar.core.services.impl;
 import java.util.List;
 
 import org.sg.eventcalendar.core.entities.Event;
+import org.sg.eventcalendar.core.jpa.IEventDao;
 import org.sg.eventcalendar.core.jpa.IGenericDao;
 import org.sg.eventcalendar.core.services.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class EventServiceImpl implements IEventService {
 	      dao = daoToSet;
 	      dao.setClazz(Event.class);
 	   }
+	   
+	   @Autowired
+	   IEventDao eventDao;
 
 	@Override
 	public void createEvent(Event entity) {
@@ -54,5 +58,10 @@ public class EventServiceImpl implements IEventService {
 	public void deleteEventById(long id) {
 		Key pk = KeyFactory.createKey("Event", id);	
 		dao.deleteById(pk);
+	}
+
+	@Override
+	public void deleteEventByStatus(String status) {
+		eventDao.deleteEventByStatus(status);
 	}
 }

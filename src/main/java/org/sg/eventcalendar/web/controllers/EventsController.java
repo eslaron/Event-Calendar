@@ -44,7 +44,8 @@ public class EventsController {
     	
     	eventService.createEvent(data);
     	
-    	String content="Wydarzenie o nazwie "+data.getName()+" odbędzie się w dniu "+data.getStartDate().getDate();
+    	String content="Wydarzenie o nazwie "+data.getName()+" odbędzie się w dniu "
+    				+data.getStartDate()+"w "+data.getLocation();
    
     	emailService.sendEMail(currentUser.getEmail(), "Kalendarz wydarzeń - Nowe wydarzenie", content);
     	
@@ -75,6 +76,11 @@ public class EventsController {
     	data.setUserNickname(currentUser.getNickname());
     	
     	eventService.updateEvent(data);
+    	
+    	String content="Wydarzenie o nazwie "+data.getName()+" zostało zaktualizowane. "
+    			+ "Zaloguj się do systemu, aby sprawdzić szczegóły";
+
+    	emailService.sendEMail(currentUser.getEmail(), data.getName()+" - aktualizacja wydarzenia", content);
     	
 			JsonObject jsonResponse = new JsonObject();
 			jsonResponse.addProperty("message", message);

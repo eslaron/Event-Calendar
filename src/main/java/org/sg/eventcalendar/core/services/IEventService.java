@@ -1,6 +1,7 @@
 package org.sg.eventcalendar.core.services;
 
 import java.util.List;
+
 import org.sg.eventcalendar.core.entities.Event;
 
 public interface IEventService {
@@ -16,4 +17,6 @@ public interface IEventService {
 	public void deleteEvent(Event entity);  
 
     public void deleteEventById(long id);
+    
+    public void deleteEventByStatus(String status);
 }
